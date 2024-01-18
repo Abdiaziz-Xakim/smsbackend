@@ -71,7 +71,18 @@ class LoginView(generics.GenericAPIView):
             "user": UserSerializer(user, context=self.get_serializer_context()).data, 
             "token": AuthToken.objects.create(user)[1]
         })
+
+# Update user
+class UpdateUserView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny,]
+
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
     
+    
+# get logedin user
 class UserAPI(generics.RetrieveAPIView):
     permission_classes = [
         permissions.AllowAny,

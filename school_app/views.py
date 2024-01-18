@@ -16,7 +16,7 @@ class CustomPageNumberPagination(PageNumberPagination):
 
 
 class StudentsViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.filter(is_active=True).order_by('-id')
+    queryset = Student.objects.filter(is_active=True).order_by('id')
     # queryset = Student.objects.all()
     serializer_class = StudentSerializer
     permission_classes = [ permissions.AllowAny ]

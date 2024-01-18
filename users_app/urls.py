@@ -6,6 +6,7 @@ urlpatterns = [
     path('register/', views.RegisterUser.as_view(), name="auth-register"),
     path('login/', views.LoginView.as_view(), name="auth-login"),
     # path('user/', views.UserAPI.as_view(), name="auth-user"),
+    path('update-user/<int:pk>/', views.UpdateUserView.as_view(), name='update-user'),
 
     path('user/', views.UserAPI.as_view(), name="auth-user"),
     path('forgot-password/', views.ForgotPasswordAPIView.as_view(), name="forgot-password"),
