@@ -29,7 +29,7 @@ class CustomPageNumberPagination(PageNumberPagination):
 
 
 class FeepaymentView(generics.ListAPIView):
-    queryset = Feepayment.objects.filter(is_active=True).order_by('-id')
+    queryset = Feepayment.objects.filter(is_active=True).order_by('id')
     permission_classes = [ permissions.AllowAny ] 
     serializer_class = FeePaymentSerializer
     pagination_class = CustomPageNumberPagination

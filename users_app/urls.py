@@ -7,6 +7,7 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name="auth-login"),
     # path('user/', views.UserAPI.as_view(), name="auth-user"),
     path('update-user/<int:pk>/', views.UpdateUserView.as_view(), name='update-user'),
+    path('single-user/<int:pk>/', views.UserDetailView.as_view(), name='user-detail'),
 
     path('user/', views.UserAPI.as_view(), name="auth-user"),
     path('forgot-password/', views.ForgotPasswordAPIView.as_view(), name="forgot-password"),

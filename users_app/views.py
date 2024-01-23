@@ -35,6 +35,16 @@ class UserListView(generics.ListAPIView):
     queryset = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
 
 
+# Detail view
+class UserDetailView(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.AllowAny,
+    ] 
+
+    queryset = User.objects.all()
+    
+    serializer_class = UserSerializer
+    
 # Regster user view
 class RegisterUser(generics.GenericAPIView):
     permission_classes = [
