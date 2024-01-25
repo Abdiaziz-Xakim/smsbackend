@@ -32,7 +32,30 @@ class UserListView(generics.ListAPIView):
     filterset_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
     search_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
     ordering_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
-    queryset = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
+
+    def get_queryset(self, *args, **kwargs):
+        users = User.objects.filter(is_active=True, is_superuser=False).order_by('-id')
+
+        # Role Filters
+        role = self.request.query_params.get('role',None)
+
+        if role:
+            users = users.filter(role=role)
+
+        return users
+
+
+class InactiveUsers(generics.ListAPIView):
+    permission_classes = [ permissions.AllowAny, ] 
+    serializer_class = UserSerializer
+    pagination_class = CustomPageNumberPagination
+
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
+    search_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
+    ordering_fields = ['first_name', 'last_name', 'role', 'location', 'mobile', 'email']
+    queryset = User.objects.filter(is_active=False, is_superuser=False).order_by('-id')
+
 
 
 # Detail view
