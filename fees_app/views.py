@@ -35,9 +35,9 @@ class FeepaymentView(generics.ListAPIView):
     pagination_class = CustomPageNumberPagination
 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['regno', 'fullname', 'payment_date', 'amount']
-    search_fields = ['regno', 'fullname', 'payment_date', 'amount']
-    ordering_fields = ['regno', 'fullname', 'payment_date', 'amount']
+    filterset_fields = ['student', 'payment_date', 'amount']
+    search_fields = ['student','payment_date', 'amount']
+    ordering_fields = ['student','payment_date', 'amount']
 
 # fee detail
 class FeePaymentDetailView(generics.RetrieveAPIView):

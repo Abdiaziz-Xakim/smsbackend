@@ -87,24 +87,45 @@ class StudentDetailView(generics.RetrieveAPIView):
     
     serializer_class = StudentSerializer
     
-# Regster user view
+
+# Detail view by regno
+class StudentDetailViewByRegno(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.AllowAny,
+    ] 
+
+    def retrieve(self, request, *args, **kwargs):
+        regno = kwargs['regno']
+
+        student = Student.objects.filter(regno=regno).first()
+
+        return Response(
+            StudentSerializer(student, context=self.get_serializer_context()).data, 
+        )
+
+    
+
+
+# register
 class RegisterStudent(generics.GenericAPIView):
     permission_classes = [
         permissions.AllowAny,
     ] 
 
-    serializer_class = RegisterSerializer
-    
+    serializer_class = StudentSerializer
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        student = serializer.save()
-        
+        std = serializer.save()
+
         return Response({
-            "student": StudentSerializer(student,
+            "std": StudentSerializer(std,
             context=self.get_serializer_context()).data, 
         })
-    
+
+
+
 # Update user
 class UpdateStudentView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()

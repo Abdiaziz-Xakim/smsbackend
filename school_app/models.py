@@ -3,7 +3,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Student(models.Model):
-    regno = models.CharField(max_length=100)
+    regno = models.IntegerField()
     fullname = models.CharField(max_length=100)
     classs= models.CharField(max_length=100, default=1)
     parents_name = models.CharField(max_length=100, default='')
@@ -16,8 +16,3 @@ class Student(models.Model):
 
     def __str__(self):
         return self.regno
-    
-    
-    
-    
- 

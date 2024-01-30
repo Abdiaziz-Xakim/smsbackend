@@ -5,4 +5,4 @@ from .models import  Feepayment
 class FeePaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feepayment
-        fields = ['id', 'regno', 'fullname','payment_date', 'amount']
+        fields = ['id','student', 'payment_date', 'amount']

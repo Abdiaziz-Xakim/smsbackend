@@ -20,9 +20,9 @@ from . import views
 
 urlpatterns = [ 
     path('students/', views.StudentListView.as_view(), name="student-list"),
-    # path('students/<int:pk>/', views.UpdateStudentView.as_view(), name='student-detail'),
+    path('register/', views.RegisterStudent.as_view(), name='register-student'),
     path('update-student/<int:pk>/', views.UpdateStudentView.as_view(), name='update-student'),
-    path('single-student/<int:pk>/', views.StudentDetailView.as_view(), name='student-detail'),
-
+    path('single-student/<int:pk>/', views.StudentDetailView.as_view(), name='single-student'),
+    path('single-student-by-regno/<int:regno>/', views.StudentDetailViewByRegno.as_view(), name='single-student-by-regno'),
 
 ]

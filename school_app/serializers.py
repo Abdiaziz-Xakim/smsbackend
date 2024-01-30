@@ -4,17 +4,17 @@ from rest_framework import serializers
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['id', 'regno', 'fullname', 'classs', 'parents_name', 'parents_contact', 'fees',]
+        fields = ['id', 'regno', 'fullname', 'classs', 'parents_name', 'parents_contact', 'fees', 'is_active']
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['id', 'regno', 'fullname', 'classs', 'parents_name', 'parents_contact', 'fees', '']
+        fields = ['id', 'regno', 'fullname', 'classs', 'parents_name', 'parents_contact', 'fees']
         # extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        Student = Student.objects.create_student(
+        student = Student.objects.create_student(
             validated_data['regno'],
             validated_data['fullname'],
             validated_data['parents_name'],
@@ -22,4 +22,4 @@ class RegisterSerializer(serializers.ModelSerializer):
             validated_data['fees'],
         )
             
-        return Student
+        return student
